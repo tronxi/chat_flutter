@@ -1,3 +1,4 @@
+import 'package:chat_flutter/widgets/logout_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ConversationsPage extends StatelessWidget {
@@ -6,9 +7,10 @@ class ConversationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Conversaciones"),
-      ),
+      appBar: LogoutAppBar(
+        context: context,
+        title: "Conversaciones"
+      ).build(),
       body: const Text("wip"),
     );
   }
