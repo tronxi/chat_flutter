@@ -10,15 +10,15 @@ class JoinPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) => JoinBloc(),
-        child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: const Text("Registro"),
             //automaticallyImplyLeading: false
           ),
-          body: const JoinPageContent(),
-        ),
+          body: BlocProvider(
+            create: (BuildContext context)  => JoinBloc(),
+            child: const JoinPageContent(),
+          ),
     );
   }
 }

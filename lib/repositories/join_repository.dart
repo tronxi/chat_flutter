@@ -8,15 +8,15 @@ class Error {}
 class Success {}
 
 class JoinRepository {
-  Future<Either<Error, Success>> retrieve(UserLogin userLogin) async {
+  Future<Either<Error, Success>> register(UserLogin userLogin) async {
     try {
       Dio client = HttpClient().dio;
       final userLoginRequest = UserRegisterRequest(
           name: userLogin.name, password: userLogin.password);
       await client.post(
-          "${HttpClient.baseUrl}/users", data: userLoginRequest.toJson());
+          "${HttpClient.baseUrl}users", data: userLoginRequest.toJson());
       return Right(Success());
-    } on DioError catch (e) {
+    } on DioError {
       return Left(Error());
     }
   }

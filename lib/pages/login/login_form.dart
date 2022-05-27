@@ -23,7 +23,11 @@ class LoginForm extends StatelessWidget {
                       passwordController: _passwordController
                   ),
                   const SizedBox(height: 50),
-                  LoginFormButtons(formKey: _key)
+                  LoginFormButtons(
+                      formKey: _key,
+                      nameController: _nameController,
+                      passwordController: _passwordController,
+                  )
                 ],
               )
           ),

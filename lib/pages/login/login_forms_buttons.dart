@@ -1,17 +1,23 @@
+import 'package:chat_flutter/bloc/login_bloc.dart';
+import 'package:chat_flutter/models/user_login.dart';
 import 'package:chat_flutter/routes.dart';
 import 'package:chat_flutter/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginFormButtons extends StatelessWidget {
   final GlobalKey<FormState> formKey;
-  const LoginFormButtons({Key? key, required this.formKey}) : super(key: key);
+  final TextEditingController nameController;
+  final TextEditingController passwordController;
+
+  const LoginFormButtons({Key? key, required this.formKey, required this.nameController, required this.passwordController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         PrimaryButton(
-            onPressed: _onLoginPressed,
+            onPressed: () => _onLoginPressed(context.read<LoginBloc>()),
             text: "Login"
         ),
         const SizedBox(height: 10),
@@ -22,8 +28,10 @@ class LoginFormButtons extends StatelessWidget {
       ],
     );
   }
-  void _onLoginPressed() {
+  void _onLoginPressed(LoginBloc loginBloc) {
     if (formKey.currentState?.validate() ?? false) {
+      final user = UserLogin(name: nameController.value.text, password: passwordController.value.text);
+      loginBloc.add(LoginEvent(user: user));
     }
   }
 

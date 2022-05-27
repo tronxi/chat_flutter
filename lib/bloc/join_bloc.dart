@@ -23,7 +23,7 @@ class JoinBloc extends Bloc<JoinEvent, JoinState> {
   }
 
   Future<JoinState> _onJoinEvent(UserLogin user) async {
-    final response = await joinRepository.retrieve(user);
+    final response = await joinRepository.register(user);
     return response.fold((left) => JoinFailure(), (right) => JoinSuccess());
   }
 
