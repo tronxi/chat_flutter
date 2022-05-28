@@ -16,7 +16,7 @@ class JoinPage extends StatelessWidget {
             //automaticallyImplyLeading: false
           ),
           body: BlocProvider(
-            create: (BuildContext context)  => JoinBloc(),
+            create: (BuildContext context) => JoinBloc(),
             child: const JoinPageContent(),
           ),
     );

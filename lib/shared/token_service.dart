@@ -1,10 +1,11 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:chat_flutter/shared/http_client.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 
 class TokenService {
-  late final Future<SharedPreferences> _prefs;
+  late String? _token;
 
   TokenService._() {
-    _prefs =  SharedPreferences.getInstance();
+    _token = null;
   }
 
   static final TokenService _instance = TokenService._();
@@ -13,18 +14,27 @@ class TokenService {
     return _instance;
   }
 
-  Future<void> save(String token) async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.setString('token', token);
+  void save(String token) {
+    _token = token;
+    HttpClient.token = token;
   }
 
-  Future<String?> retrieve() async {
-    SharedPreferences prefs = await _prefs;
-    return prefs.getString('token');
+  String? retrieve() {
+    return _token;
   }
 
-  Future<void> destroy() async {
-    SharedPreferences prefs = await _prefs;
-    await prefs.remove('token');
+  void destroy() {
+    _token = null;
+    HttpClient.token = null;
   }
+
+  String? retrieveUserId() {
+    if(_token != null) {
+      Map<String, dynamic> payload = Jwt.parseJwt(_token!);
+      return payload["id"];
+    } else {
+      return null;
+    }
+  }
+
 }

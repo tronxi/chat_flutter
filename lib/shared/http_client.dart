@@ -1,10 +1,19 @@
 import 'package:dio/dio.dart';
 
 class HttpClient {
+  static String? token;
   late final Dio _dio;
   static const baseUrl = "https://tronxi.ddns.net/chat-nginx/";
   HttpClient._() {
     _dio = Dio();
+    _dio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) {
+        if (token != null) {
+          options.headers['authorization'] = "Bearer $token!";
+        }
+        return handler.next(options);
+      },
+    ));
   }
 
   static final HttpClient _instance = HttpClient._();

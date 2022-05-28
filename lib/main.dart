@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.cyan,
           brightness: Brightness.dark
         ),
-        themeMode: ThemeMode.system,
+        themeMode: ThemeMode.light,
         home: const LoginPage(),
         initialRoute: RouteGenerator.loginPage,
         onGenerateRoute: RouteGenerator.generateRoute

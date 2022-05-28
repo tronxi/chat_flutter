@@ -15,15 +15,15 @@ class JoinSuccess extends JoinState {}
 class JoinFailure extends JoinState {}
 
 class JoinBloc extends Bloc<JoinEvent, JoinState> {
-  late final JoinRepository joinRepository;
+  late final JoinRepository _joinRepository;
 
   JoinBloc() : super(JoinInitial()) {
-    joinRepository = JoinRepository();
+    _joinRepository = JoinRepository();
     on<JoinEvent>((event, emit) async => emit(await _onJoinEvent(event.user)));
   }
 
   Future<JoinState> _onJoinEvent(UserLogin user) async {
-    final response = await joinRepository.register(user);
+    final response = await _joinRepository.register(user);
     return response.fold((left) => JoinFailure(), (right) => JoinSuccess());
   }
 
