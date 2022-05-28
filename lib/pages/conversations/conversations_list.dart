@@ -15,10 +15,10 @@ class ConversationsList extends StatelessWidget {
     }
     return SizedBox(
       width: double.infinity,
-      child: Container(
-        margin: const EdgeInsets.only(top: 20),
-        child: SingleChildScrollView(
+      child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
+          child: Container(
+            margin: const EdgeInsets.only(top: 20),
           child: Wrap(
             spacing: 15,
             alignment: WrapAlignment.center,
