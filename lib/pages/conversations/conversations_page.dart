@@ -1,4 +1,5 @@
 import 'package:chat_flutter/bloc/conversations_bloc.dart';
+import 'package:chat_flutter/pages/conversations/conversations_list.dart';
 import 'package:chat_flutter/shared/snackbar.dart';
 import 'package:chat_flutter/shared/token_service.dart';
 import 'package:chat_flutter/widgets/logout_app_bar.dart';
@@ -35,8 +36,7 @@ class ConversationsPageContent extends StatelessWidget {
           context.read<ConversationsBloc>().add(ConversationsRetrieve(userId: TokenService().retrieveUserId()));
           return const Center(child: CircularProgressIndicator());
         }else if (state is ConversationsRetrieved) {
-          print(state.conversations);
-          return const Text("ok");
+          return ConversationsList(conversations: state.conversations);
         }else {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             Snackbar.showError(context, "Error al recuperar las conversaciones");
